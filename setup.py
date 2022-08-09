@@ -18,11 +18,11 @@ def readme() -> str:
     return open(os.path.join(os.path.dirname(__file__), 'README.md')).read()
 
 setup(
-    name='spectral_analysis',
+    name='hyspexutil',
     version='0.1.0',
     author='Chris Waigl',
     author_email='cwaigl@alaska.edu',
-    description='Analysis of hyperspectral and spectral data',
+    description='Analysis of 1m HySpex data aquired 2019+ at UAF',
     python_requires='>=3',
     license='MIT',
     url='',
