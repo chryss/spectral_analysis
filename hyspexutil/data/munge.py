@@ -1,6 +1,8 @@
 from scipy.signal import savgol_filter
 
-def smooth_spectrum(spectrum, savgol=True, window=7, order=2, clip_bands=10, scale_down=True):
+def smooth_spectrum(spectrum, 
+    savgol=True, window=7, order=2, 
+    clip_bands=10, scale_down=True):
     
     if scale_down:
         spectrum = spectrum/10000
@@ -14,3 +16,5 @@ def smooth_spectrum(spectrum, savgol=True, window=7, order=2, clip_bands=10, sca
             return spectrum[:-clip_bands]
         else:
             return spectrum 
+    
+
