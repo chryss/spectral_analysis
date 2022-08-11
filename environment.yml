@@ -2,7 +2,6 @@
 # mamba env create --file environment.yml
 name: spectral_analysis
 channels:
-  - anaconda
   - conda-forge
   - defaults
 dependencies:
@@ -10,25 +9,13 @@ dependencies:
   - invoke
   - jupyter
   - jupyterlab
-  - keras
-  - lightgbm
   - matplotlib
-  - missingno
-  - nbdime
   - numpy
   - pandas
   - pandas-flavor
   - pandas-profiling
   - pip
-  - plotly
-  - pyjanitor
-  - pylint
-  - pyprojroot
-  - pyspark
   - python=3.8
-  - python-dotenv
   - scikit-learn
   - seaborn
-  - statsmodels
-  - tensorflow
   

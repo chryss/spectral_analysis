@@ -3,6 +3,10 @@ from scipy.signal import savgol_filter
 def smooth_spectrum(spectrum, 
     savgol=True, window=7, order=2, 
     clip_bands=10, scale_down=True):
+    """Smoothes a HySpex spectrum with a Savitzky-Golay filter.
+    Optional clipping: removes bands at end 
+    Optional downscaling to reflectance 0...1 
+    """
     
     if scale_down:
         spectrum = spectrum/10000
