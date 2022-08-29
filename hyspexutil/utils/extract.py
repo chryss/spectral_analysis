@@ -25,7 +25,8 @@ def get_spectra_pts(fpth, xcoords, ycoords, bands="all"):
     ys = xr.DataArray(ycoords, dims='pt_idx')
     with  xr.open_dataset(fpth, 
         engine="rasterio", 
-        chunks={'band': 'auto', 'x': 400, 'y': 400}) as src:
+        #chunks={'band': 'auto', 'x': 400, 'y': 400}
+        ) as src:
         return src.band_data.sel(x=xs, y=ys, 
             band=bands, method="nearest")
 
@@ -35,11 +36,11 @@ def get_spectrum_single(fpth, x, y, bands=all):
 
 def get_spectra_df(fpth, xs, ys, bands):
     """Multiple spectra, return a dataframe"""
-    specDA = get_spectra_pts(fpth, xs, ys, bands
+    specDA = get_spectra_pts(fpth, xs, ys, bands)
     specDF = specDA.to_dataframe().reset_index().pivot(
        index=['pt_idx', 'x', 'y'], columns=['band'], 
-       values='band_data').reindex(columns=bands)
-    specDF.columns = [f"band{ii.zfill(3)}" for ii in specDF.columns]
+       values='band_data')
+    specDF.columns = [f"band{str(ii).zfill(3)}" for ii in specDF.columns]
     specDF.columns.name = None
     return specDF
 
@@ -49,8 +50,8 @@ def get_spectra_hexagon(fp, hexa, bands):
     ys = np.arange(np.floor(hexa.bottom), np.ceil(hexa.top)+1)
     pts = [Point(x, y) 
         for x in xs for y in ys 
-        if row.geometry.contains(Point(x, y))]
-    return get_spectra_df(fpth, [pt.x for pt in pts], [pt.y for pt in pts], bands)
+        if hexa.geometry.contains(Point(x, y))]
+    return get_spectra_df(fp, [pt.x for pt in pts], [pt.y for pt in pts], bands)
 
 
 if __name__ ==  '__main__':
